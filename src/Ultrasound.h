@@ -5,7 +5,8 @@
 #ifndef CAR_ULTRASOUND_H
 #define CAR_ULTRASOUND_H
 #include <arduino.h>
-#include <Four-way tracking.h>
+#include <Motor.h>
+
 struct UltraSound{
     // 超声波引脚
     const int trigpin = A4;
@@ -25,22 +26,6 @@ private:
 
 };
 
-
-
-
-// 控制小车直行
-void Ultrasound_ZHIXING();
-
-// 控制小车倒退
-void Ultrasound_DAOTUI();
-
-void Ultrasound_ZUOZHUAN();
-
-void Ultrasound_YOUZHUAN();
-
-void Ultrasound_TINGZHI();
-
-
-
+void Ultrasound_Move();
 
 #endif //CAR_ULTRASOUND_H

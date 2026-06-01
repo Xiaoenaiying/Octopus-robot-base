@@ -13,8 +13,8 @@ const int QB2 = 5;
 // 定义后端电机驱动引脚
 const int HA1 = 6;
 const int HA2 = 7;
-const int HB1 = 8;
-const int HB2 = 9;
+const int HB1 = 12;
+const int HB2 = 13;
 
 // 定义传感器引脚
 const int S1 = A0; //外线

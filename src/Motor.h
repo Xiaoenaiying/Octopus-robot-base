@@ -7,7 +7,6 @@
 #include <arduino.h>
 #include <Motor_Pin.h>
 
-void Motor_Init();
 
 //描述运动状态事件
 enum Motor {
@@ -17,7 +16,10 @@ enum Motor {
     YOUZHUAN,
     TINGZHI
 };
-struct Motor_State {
+class Motor_State {
+public:
+    void Event_Judgment(Motor EvEnt);
+private:
     // 控制小车直行
     void Motor_ZHIXING();
     // 控制小车倒退
@@ -28,9 +30,6 @@ struct Motor_State {
     void Motor_YOUZHUAN();
     // 控制小车停止
     void Motor_TINGZHI();
-
-    void Event_Judgment(Motor EvEnt);
 };
-
-
+void Motor_Init();
 #endif //CAR_MOTOR_H
