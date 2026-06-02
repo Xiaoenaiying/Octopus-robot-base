@@ -32,22 +32,34 @@ void Ultrasound_Move() {
     // Serial.println("cm");
 
     if(cunchuabc > 0){
+        Motor_RUN.SpeedLA1=0;
+        Motor_RUN.SpeedLB1=0;
+        Motor_RUN.SpeedHA1=0;
+        Motor_RUN.SpeedHB1=0;
         if(cunchuabc == 20){
             //等于20cm：停止
             // Serial.println("距离=20cm,停止");
-            Motor_RUN.Event_Judgment(TINGZHI);
+            Motor_RUN.Event_Judgment(TINGZHI,Motor_RUN.SpeedLA1,Motor_RUN.SpeedLB1,Motor_RUN.SpeedHA1,Motor_RUN.SpeedHB1);
         }else if(cunchuabc > 20){
             //大于20cm：直行（向前追）
             // Serial.println("距离>20cm,直行");
-            Motor_RUN.Event_Judgment(ZHIXING);
+            Motor_RUN.SpeedLA1=100;
+            Motor_RUN.SpeedLB1=100;
+            Motor_RUN.SpeedHA1=100;
+            Motor_RUN.SpeedHB1=100;
+            Motor_RUN.Event_Judgment(ZHIXING,Motor_RUN.SpeedLA1,Motor_RUN.SpeedLB1,Motor_RUN.SpeedHA1,Motor_RUN.SpeedHB1);
         }else{
+            Motor_RUN.SpeedLA1=100;
+            Motor_RUN.SpeedLB1=100;
+            Motor_RUN.SpeedHA1=100;
+            Motor_RUN.SpeedHB1=100;
             // //小于20cm：倒退（保持距离）
             // Serial.println("距离<20cmm,倒退");
-            Motor_RUN.Event_Judgment(DAOTUI);
+            Motor_RUN.Event_Judgment(DAOTUI,Motor_RUN.SpeedLA1,Motor_RUN.SpeedLB1,Motor_RUN.SpeedHA1,Motor_RUN.SpeedHB1);
         }
     }else{
         // Serial.println("测量无效，停止");
-        Motor_RUN.Event_Judgment(TINGZHI);
+        Motor_RUN.Event_Judgment(TINGZHI,Motor_RUN.SpeedLA1,Motor_RUN.SpeedLB1,Motor_RUN.SpeedHA1,Motor_RUN.SpeedHB1);
     }
 }
 

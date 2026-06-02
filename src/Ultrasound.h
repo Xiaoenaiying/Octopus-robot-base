@@ -22,7 +22,7 @@ public:
 
 private:
     // 设置超声波测距阀值
-    int jiancejuli = 20;
+    uint8_t jiancejuli = 20;
 
 };
 

@@ -23,38 +23,83 @@ void PS2_Control()
 
   Motor_State PS2Move;
 
+  PS2Move.SpeedLA1=0;
+  PS2Move.SpeedLB1=0;
+  PS2Move.SpeedHA1=0;
+  PS2Move.SpeedHB1=0;
+//控制底座左右 - 左摇杆左右
+if(ps2x.Analog(PSS_LX) < 50) {  // 左摇杆向左
+  PS2Move.SpeedLA1=100;
+  PS2Move.SpeedLB1=150;
+  PS2Move.SpeedHA1=100;
+  PS2Move.SpeedHB1=150;
+  PS2Move.Event_Judgment(ZUOZHUAN,PS2Move.SpeedLA1,PS2Move.SpeedLB1,PS2Move.SpeedHA1,PS2Move.SpeedHB1);
+}
+else if(ps2x.Analog(PSS_LX) > 200) {  // 左摇杆向右
+  PS2Move.SpeedLA1=150;
+  PS2Move.SpeedLB1=100;
+  PS2Move.SpeedHA1=150;
+  PS2Move.SpeedHB1=100;
+  PS2Move.Event_Judgment(YOUZHUAN,PS2Move.SpeedLA1,PS2Move.SpeedLB1,PS2Move.SpeedHA1,PS2Move.SpeedHB1);
+}
+
+// 控制底座前进和后退 - 右摇杆上下
+  if(ps2x.Analog(PSS_RY) < 50) {  // 右摇杆向上
+    PS2Move.SpeedLA1=150;
+    PS2Move.SpeedLB1=150;
+    PS2Move.SpeedHA1=100;
+    PS2Move.SpeedHB1=100;
+  PS2Move.Event_Judgment(ZHIXING,PS2Move.SpeedLA1,PS2Move.SpeedLB1,PS2Move.SpeedHA1,PS2Move.SpeedHB1);
+}
+else if(ps2x.Analog(PSS_RY) > 200) {  // 右摇杆向下
+  PS2Move.SpeedLA1=100;
+  PS2Move.SpeedLB1=100;
+  PS2Move.SpeedHA1=150;
+  PS2Move.SpeedHB1=150;
+  PS2Move.Event_Judgment(DAOTUI,PS2Move.SpeedLA1,PS2Move.SpeedLB1,PS2Move.SpeedHA1,PS2Move.SpeedHB1);
+}
+
+// 按钮控制 --
+if(ps2x.Button(PSB_TRIANGLE)) {  // △按钮 -超声波控制
+  Ultrasound_Move();
+  delay(100);
+}
+
+if(ps2x.Button(PSB_PINK)) {  // 按钮 - 四路循迹控制
+  tracing();
+  delay(50);
+}
+
+if(ps2x.Button(PSB_BLUE)) {  // ×按钮 - PS2控制
+  PS2Move.Event_Judgment(TINGZHI,PS2Move.SpeedLA1,PS2Move.SpeedLB1,PS2Move.SpeedHA1,PS2Move.SpeedHB1);
+  delay(50);
+}
+delay(50);
 
 }
 
- // 控制底座左右 - 左摇杆左右
-// if(ps2x.Analog(PSS_LX) < 50) {  // 左摇杆向左
-//   PS2Move.Motor_ZUOZHUAN();
-// }
-// else if(ps2x.Analog(PSS_LX) > 200) {  // 左摇杆向右
-//   PS2Move.Motor_YOUZHUAN();
-// }
-//
-// // 控制底座前进和后退 - 右摇杆上下
-// if(ps2x.Analog(PSS_RY) < 50) {  // 右摇杆向上
-//   PS2Move.Motor_ZHIXING();
-// }
-// else if(ps2x.Analog(PSS_RY) > 200) {  // 右摇杆向下
-//   PS2Move.Motor_DAOTUI();
-// }
-//
-// // 按钮控制 --
-// if(ps2x.Button(PSB_TRIANGLE)) {  // △按钮 -超声波控制
-//   Ultrasound_Move();
-//   delay(100);
-// }
-//
-// if(ps2x.Button(PSB_PINK)) {  // 按钮 - 四路循迹控制
-//   tracing();
-//   delay(50);
-// }
-//
-// if(ps2x.Button(PSB_BLUE)) {  // ×按钮 - PS2控制
-//   PS2Move.Motor_TINGZHI();
-//   delay(50);
-// }
-// delay(50);
+bool PS2_Move::button_Getstate(button_type button) {
+  //三角形按键
+  if (Triangle_button==button) {
+    return Triangle_button;
+  }
+  //X型按键
+  else if (X_type_button==button) {
+    return X_type_button;
+  }
+  //Y型按键
+  else if (O_type_button==button) {
+    return O_type_button;
+  }
+  return false;
+}
+
+bool PS2_Move::button_check(button_type, key_event_t key_eve) {
+   key_eve=EVT_NONE;
+}
+
+void PS2_Move::PS2_tick() {
+
+}
+
+

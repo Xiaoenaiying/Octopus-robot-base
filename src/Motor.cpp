@@ -24,53 +24,53 @@ void Motor_Init() {
     // 控制小车直行
     void Motor_State::Motor_ZHIXING(){
         // 前端电机
-        digitalWrite(QA1,HIGH);
+        analogWrite(QA1,SpeedLA1);
         digitalWrite(QA2,LOW);
-        digitalWrite(QB1,HIGH);
+        analogWrite(QB1,SpeedLB1);
         digitalWrite(QB2,LOW);
         // 后端电机
-        digitalWrite(HA1,HIGH);
+        analogWrite(HA1,SpeedHA1);
         digitalWrite(HA2,LOW);
-        digitalWrite(HB1,HIGH);
+        analogWrite(HB1,SpeedHB1);
         digitalWrite(HB2,LOW);
     }
     // 控制小车倒退
     void Motor_State::Motor_DAOTUI(){
         // 前端电机
-        digitalWrite(QA1,LOW);
+        analogWrite(QA1,SpeedLA1);
         digitalWrite(QA2,HIGH);
-        digitalWrite(QB1,LOW);
+        analogWrite(QB1,SpeedLB1);
         digitalWrite(QB2,HIGH);
         // 后端电机
-        digitalWrite(HA1,LOW);
+        analogWrite(HA1,SpeedHA1);
         digitalWrite(HA2,HIGH);
-        digitalWrite(HB1,LOW);
+        analogWrite(HB1,SpeedHB1);
         digitalWrite(HB2,HIGH);
     }
     // 控制小车左转
     void Motor_State::Motor_ZUOZHUAN(){
         // 前端电机
-        digitalWrite(QA1,LOW);
+        analogWrite(QA1,SpeedLA1);
         digitalWrite(QA2,HIGH);
-        digitalWrite(QB1,HIGH);
+        analogWrite(QB1,SpeedLB1);
         digitalWrite(QB2,LOW);
         // 后端电机
-        digitalWrite(HA1,LOW);
+        analogWrite(HA1,SpeedHA1);
         digitalWrite(HA2,HIGH);
-        digitalWrite(HB1,HIGH);
+        analogWrite(HB1,SpeedHB1);
         digitalWrite(HB2,LOW);
     }
     // 控制小车右转
     void Motor_State::Motor_YOUZHUAN(){
         // 前端电机
-        digitalWrite(QA1,HIGH);
+        analogWrite(QA1,SpeedLA1);
         digitalWrite(QA2,LOW);
-        digitalWrite(QB1,LOW);
+        analogWrite(QB1,SpeedLB1);
         digitalWrite(QB2,HIGH);
         // 后端电机
-        digitalWrite(HA1,HIGH);
+        analogWrite(HA1,SpeedHA1);
         digitalWrite(HA2,LOW);
-        digitalWrite(HB1,LOW);
+        analogWrite(HB1,SpeedHB1);
         digitalWrite(HB2,HIGH);
     }
     // 控制小车停止
@@ -87,8 +87,13 @@ void Motor_Init() {
         digitalWrite(HB2,LOW);
     }
 
-void Motor_State::Event_Judgment(Motor EvEnt) {
+void Motor_State::Event_Judgment(Motor EvEnt,uint16_t &SpeedLA1,uint16_t &SpeedLB1,uint16_t &SpeedHA1,uint16_t &SpeedHB1){
      {
+         this->SpeedLA1 = SpeedLA1;
+         this->SpeedLB1 = SpeedLB1;
+         this->SpeedHA1 = SpeedHA1;
+         this->SpeedHB1 = SpeedHB1;
+         this->EvEnt=EvEnt;
         // 保持原有代码不变
         switch(EvEnt){
             case ZHIXING:
