@@ -14,7 +14,7 @@ long Ultrasound::huoqujuli() {
     digitalWrite(UltraSound_Pins.trigpin,LOW);
 
     // 检测回声时间（核心函数）
-    long shuzhiabc = pulseIn(UltraSound_Pins.echopin,HIGH);
+    long shuzhiabc = pulseIn(UltraSound_Pins.echopin, HIGH, 30000);  // 30ms超时，防止传感器异常时硬阻塞
 
     // 计算距离
     long cunchuabc = shuzhiabc*0.034/2;

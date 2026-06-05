@@ -87,7 +87,7 @@ void Motor_Init() {
         digitalWrite(HB2,LOW);
     }
 
-void Motor_State::Event_Judgment(Motor EvEnt,uint16_t &SpeedLA1,uint16_t &SpeedLB1,uint16_t &SpeedHA1,uint16_t &SpeedHB1){
+void Motor_State::Event_Judgment(Motor EvEnt,uint8_t &SpeedLA1,uint8_t &SpeedLB1,uint8_t &SpeedHA1,uint8_t &SpeedHB1){
      {
          this->SpeedLA1 = SpeedLA1;
          this->SpeedLB1 = SpeedLB1;

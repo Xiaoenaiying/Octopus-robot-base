@@ -22,7 +22,7 @@
 #define PS2_CLK 8
 
 // 模式配置
-#define pressures false
+#define pressures true
 #define rumble false
 
 // 控制灵敏度
@@ -44,13 +44,22 @@ enum button_type{
     O_type_button//O按键单击（执行底盘PS2控制）,双击执行机械臂控制
 };
 
+typedef struct{
+    uint8_t LX_X;
+    uint8_t LX_Y;
+    uint8_t RX_X;
+    uint8_t RX_Y;
+}Joystick_force;
+
 class PS2_Move {
 public:
     void PS2_tick();
+    Joystick_force Joystick_Getforce{};
 private:
     uint32_t Key_Flag;
     bool button_Getstate(button_type);//按键类型取
     bool button_check(button_type, key_event_t);//按键状态检查
+
     const uint8_t KEY_HOLD=0x01;
     const uint8_t KEY_DOWN=0x02;
     const uint8_t KEY_UP=0x04;

@@ -18,7 +18,7 @@ enum Motor {
 };
 class Motor_State {
 public:
-    void Event_Judgment(Motor EvEnt,uint16_t &SpeedLA1,uint16_t &SpeedLB1,uint16_t &SpeedHA1,uint16_t &SpeedHB1);
+    void Event_Judgment(Motor EvEnt,uint8_t &SpeedLA1,uint8_t &SpeedLB1,uint8_t &SpeedHA1,uint8_t &SpeedHB1);
 private:
     // 控制小车直行
     void Motor_ZHIXING();
@@ -32,10 +32,10 @@ private:
     void Motor_TINGZHI();
 public:
     Motor EvEnt;
-    uint16_t SpeedLA1;
-    uint16_t SpeedHA1;
-    uint16_t SpeedLB1;
-    uint16_t SpeedHB1;
+    uint8_t SpeedLA1;
+    uint8_t SpeedHA1;
+    uint8_t SpeedLB1;
+    uint8_t SpeedHB1;
 };
 void Motor_Init();
 #endif //CAR_MOTOR_H
